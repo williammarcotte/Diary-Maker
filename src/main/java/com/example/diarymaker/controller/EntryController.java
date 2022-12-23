@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-//@CrossOrigin("*")
+//@CrossOrigin("*")a
 @RequestMapping("api/entries")
 public class EntryController {
 
