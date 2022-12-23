@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 //@CrossOrigin("*")a
-@RequestMapping("api/entries")
+@RequestMapping("api/entries/")
 public class EntryController {
 
     @Autowired
