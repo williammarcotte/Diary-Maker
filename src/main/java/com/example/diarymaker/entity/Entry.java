@@ -23,12 +23,13 @@ public class Entry {
     @Column(name="content",nullable = false)
     private String content;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "entry")
+    @OneToMany()
     private List<Tag> tags;
 
 
     public Entry(EntryRequest entryRequest){
         title = entryRequest.getTitle();
         content = entryRequest.getContent();
+
     }
 }

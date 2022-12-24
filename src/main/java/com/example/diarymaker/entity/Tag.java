@@ -19,7 +19,7 @@ public class Tag {
     @Column(nullable = false)
     private String text;
 
-    @ManyToOne
+    @ManyToOne//(optional = false)
     @OnDelete(action= OnDeleteAction.CASCADE)
     @JoinColumn(name = "entry_id")
     private Entry entry;

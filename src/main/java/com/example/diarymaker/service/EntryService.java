@@ -20,7 +20,7 @@ public class EntryService {
     @Autowired
     TagRepository tagRepository;
 
-    public Tag addTag(long entry_id, @Valid TagRequest entryRequest){
+    public Tag addTag(long entry_id, TagRequest entryRequest){//valid?
         Entry entry = entryRepository.findById(entry_id).orElseThrow(()->new ResourceNotFoundException("entry id not found"));
 
         Tag tagToBeSaved = new Tag(new TagRequest());

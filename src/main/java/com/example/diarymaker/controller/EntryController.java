@@ -16,45 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-//@CrossOrigin("*")a
-@RequestMapping("api/entries")
+@CrossOrigin("*")
+@RequestMapping("/api/entries")
 public class EntryController {
 
     @Autowired
     EntryService entryService;
 
-    @GetMapping()// /"entryId"/tags
-    public List<EntryResponse> getAllEntries(@RequestParam(required = false) String title){
-        List<Entry> entries = entryService.getAllEntries(title);
-
-        List<EntryResponse> entryResponse = new ArrayList<>();
-        entries.forEach(entry ->{
-            entryResponse.add(new EntryResponse(entry));
-        });
-
-        return entryResponse;
-    }
-
-    @PostMapping()//"/{entry_id}/tags"
-    @ResponseStatus(HttpStatus.CREATED)
-    public EntryResponse addEntry(@RequestBody EntryRequest entryRequest){
-        Entry savedEntry = entryService.addEntry(entryRequest);
-
-        return new EntryResponse(savedEntry);
-    }
-
-    @PutMapping("/{id}")
-    public EntryResponse updateEntry
-            (@PathVariable long id,
-             @Valid @RequestBody EntryRequest entryRequest){
-        Entry updatedEntry = entryService.updateEntry(id, entryRequest);
-        return new EntryResponse(updatedEntry);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteEntry(@PathVariable long id){
-        entryService.deleteEntry(id);
-    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{entry_id}/tags")
@@ -77,5 +45,41 @@ public class EntryController {
 
     @DeleteMapping("{entryId}/tags")
     public void deleteAllTags(@PathVariable long entryId){entryService.deleteAllTags(entryId);}
+
+    @GetMapping()// /"entryId"/tags
+    public List<EntryResponse> getAllEntries(@RequestParam(required = false) String title){
+        List<Entry> entries = entryService.getAllEntries(title);
+
+        List<EntryResponse> entryResponse = new ArrayList<>();
+        entries.forEach(entry ->{
+            entryResponse.add(new EntryResponse(entry));
+        });
+
+        return entryResponse;
+    }
+
+    @PostMapping()//"/{entry_id}/tags"
+    @ResponseStatus(HttpStatus.CREATED)
+    public EntryResponse addEntry(@RequestBody EntryRequest entryRequest){
+        Entry savedEntry = entryService.addEntry(entryRequest);
+
+        return new EntryResponse(savedEntry);
+    }
+
+
+    @PutMapping("/{id}")
+    public EntryResponse updateEntry
+            (@PathVariable long id,
+             @Valid @RequestBody EntryRequest entryRequest){
+        Entry updatedEntry = entryService.updateEntry(id, entryRequest);
+        return new EntryResponse(updatedEntry);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteEntry(@PathVariable long id){
+        entryService.deleteEntry(id);
+    }
+
+
 }
 
