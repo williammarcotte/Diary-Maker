@@ -1,8 +1,11 @@
 package com.example.diarymaker.controller;
 
 import com.example.diarymaker.entity.Entry;
+import com.example.diarymaker.entity.Tag;
 import com.example.diarymaker.request.EntryRequest;
+import com.example.diarymaker.request.TagRequest;
 import com.example.diarymaker.response.EntryResponse;
+import com.example.diarymaker.response.TagResponse;
 import com.example.diarymaker.service.EntryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,4 +55,27 @@ public class EntryController {
     public void deleteEntry(@PathVariable long id){
         entryService.deleteEntry(id);
     }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/{entry_id}/tags")
+    public TagResponse addTag(
+            @PathVariable long entry_id,
+            @Valid @RequestBody TagRequest tagRequest
+            ){
+        return new TagResponse(entryService.addTag(entry_id, tagRequest));
+    }
+
+    @GetMapping("{entryId}/tags")
+    public List<TagResponse> getAllTags(@PathVariable long entryId){
+        List<Tag> tags = entryService.getAllTags(entryId);
+        List<TagResponse> tagResponses = new ArrayList<>();
+        for(int i=0; i < tags.size();i++){
+            tagResponses.add(new TagResponse(tags.get(i)));
+        }
+        return tagResponses;
+    }
+
+    @DeleteMapping("{entryId}/tags")
+    public void deleteAllTags(@PathVariable long entryId){entryService.deleteAllTags(entryId);}
 }
+
