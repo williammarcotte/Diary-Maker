@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @Setter
@@ -17,8 +19,13 @@ public class Tag {
     @Column(nullable = false)
     private String text;
 
-    public Tag(TagRequest tagRequest){
+    @ManyToOne
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @JoinColumn(name = "entry_id")
+    private Entry entry;
 
+    public Tag(TagRequest tagRequest){
+        text = tagRequest.getText();
     }
 
 }

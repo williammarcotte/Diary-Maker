@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name="entries")
 @Getter
@@ -21,7 +23,9 @@ public class Entry {
     @Column(name="content",nullable = false)
     private String content;
 
-    //@OneToMany(cascade = CascadeType.ALL, optional = true) //??? for tags
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "entry")
+    private List<Tag> tags;
+
 
     public Entry(EntryRequest entryRequest){
         title = entryRequest.getTitle();

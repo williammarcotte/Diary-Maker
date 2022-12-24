@@ -21,8 +21,8 @@ public class EntryController {
     EntryService entryService;
 
     @GetMapping()// /"entryId"/tags
-    public List<EntryResponse> getAllEntries(){
-        List<Entry> entries = entryService.getAllEntries();
+    public List<EntryResponse> getAllEntries(@RequestParam(required = false) String title){
+        List<Entry> entries = entryService.getAllEntries(title);
 
         List<EntryResponse> entryResponse = new ArrayList<>();
         entries.forEach(entry ->{

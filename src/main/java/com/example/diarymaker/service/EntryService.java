@@ -15,9 +15,12 @@ public class EntryService {
     @Autowired
     EntryRepository entryRepository;
 
-    public List<Entry> getAllEntries(){
-        //null/isBlank
+    public List<Entry> getAllEntries(String title){
+        if(title == null || title.isEmpty())
         return (List<Entry>) entryRepository.findAll();
+        else{
+            return entryRepository.findAllByTitle(title);
+        }
     }
 
     public Entry addEntry(EntryRequest entryRequest){
