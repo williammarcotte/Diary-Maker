@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface TagRepository extends CrudRepository<Tag,Long> {
-    List<Tag> findAllByEntryId(long id);
+    List<Tag> findAllByEntryId(long course_id);//id
     @Transactional//
-    void deleteAllByEntryId(long id);
+    void deleteAllByEntryId(long courseId);//id
 }
