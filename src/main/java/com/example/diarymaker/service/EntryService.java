@@ -26,6 +26,15 @@ public class EntryService {
         return entryRepository.save(entry);
     }
 
+    public Entry updateEntry(long entryId, EntryRequest entryRequest){
+        entryRepository.findById(entryId)
+                .orElseThrow(()->new ResourceNotFoundException("Entry id is not found"));
+
+        Entry entryToBeUpdated = new Entry(entryRequest);
+        entryToBeUpdated.setId(entryId);
+
+        return entryRepository.save(entryToBeUpdated);
+    }
     public void deleteEntry(long entryId){
         if(entryRepository.existsById(entryId)){
             entryRepository.deleteById(entryId);
