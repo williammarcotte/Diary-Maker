@@ -19,7 +19,7 @@ public class Tag {
     @Column(nullable = false)
     private String text;
 
-    @ManyToOne//(optional = false)
+    @ManyToOne
     @OnDelete(action= OnDeleteAction.CASCADE)
     @JoinColumn(name = "entry_id")
     private Entry entry;
@@ -27,5 +27,4 @@ public class Tag {
     public Tag(TagRequest tagRequest){
         text = tagRequest.getText();
     }
-
 }

@@ -7,7 +7,6 @@ import com.example.diarymaker.repository.EntryRepository;
 import com.example.diarymaker.repository.TagRepository;
 import com.example.diarymaker.request.EntryRequest;
 import com.example.diarymaker.request.TagRequest;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,7 @@ public class EntryService {
     @Autowired
     TagRepository tagRepository;
 
-    public Tag addTag(long entry_id, TagRequest entryRequest){//valid?
+    public Tag addTag(long entry_id, TagRequest entryRequest){
         Entry entry = entryRepository.findById(entry_id).orElseThrow(()->new ResourceNotFoundException("entry id not found"));
 
         Tag tagToBeSaved = new Tag(new TagRequest());

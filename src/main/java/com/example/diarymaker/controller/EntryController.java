@@ -46,7 +46,7 @@ public class EntryController {
     @DeleteMapping("{entryId}/tags")
     public void deleteAllTags(@PathVariable long entryId){entryService.deleteAllTags(entryId);}
 
-    @GetMapping()// /"entryId"/tags
+    @GetMapping()
     public List<EntryResponse> getAllEntries(@RequestParam(required = false) String title){
         List<Entry> entries = entryService.getAllEntries(title);
 
@@ -58,7 +58,7 @@ public class EntryController {
         return entryResponse;
     }
 
-    @PostMapping()//"/{entry_id}/tags"
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public EntryResponse addEntry(@RequestBody EntryRequest entryRequest){
         Entry savedEntry = entryService.addEntry(entryRequest);
